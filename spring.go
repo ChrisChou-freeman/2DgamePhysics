@@ -31,14 +31,13 @@ func (s *Spring) UpdateSpring(c *Circle){
   c.Velocity.Y += 0.15
 }
 
-
 func (s *Spring) Update(){
   radius := 5.0
   radius += float64(rand.Intn(5))
   vector := &FPoint{}
   vector.X = float64(rand.Intn(20))/10.0 - 1
   vector.Y = -5
-  whiteRGBA := color.RGBA{255,255,255,255}
+  whiteRGBA := color.RGBA{59, 208, 255, 255}
   newCircle := NewCircle(radius, &FPoint{float64(s.position.X), float64(s.position.Y)}, vector, whiteRGBA)
   s.circles = append(s.circles, newCircle)
   need_remove := []int{}
