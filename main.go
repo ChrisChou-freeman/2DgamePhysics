@@ -15,7 +15,7 @@ type Game struct{
 }
 
 func (g *Game) init() {
-  g.physicsTypeList = []GameManager{NewThrow(), NewSpring(), NewFire()}
+  g.physicsTypeList = []GameManager{NewThrow(), NewSpring(), NewFire(), NewExplode()}
   g.testType = g.physicsTypeList[g.currentTest] 
 }
 

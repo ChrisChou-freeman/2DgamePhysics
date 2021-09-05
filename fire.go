@@ -52,7 +52,7 @@ func (f *Fire) Update(){
       f.circles = f.circles[:item]
     }else{
       f.circles = append(f.circles[:item], f.circles[item+1:]...)
-      for i:= index+1; i<len(need_remove)-1; i++{
+      for i:= index+1; i<len(need_remove); i++{
         need_remove[i]--
       }
     }

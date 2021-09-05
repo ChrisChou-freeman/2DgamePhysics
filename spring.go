@@ -52,7 +52,7 @@ func (s *Spring) Update(){
       s.circles = s.circles[:item]
     }else{
       s.circles = append(s.circles[:item], s.circles[item+1:]...)
-      for i:= index+1; i<len(need_remove)-1; i++{
+      for i:= index+1; i<len(need_remove); i++{
         need_remove[i]--
       }
     }
