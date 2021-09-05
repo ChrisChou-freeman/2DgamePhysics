@@ -11,9 +11,10 @@ import(
 
 type Explode struct{
   position *image.Point
-  explodeDot int
   circles []*Circle
   expandTime int
+  explodeDot int
+  exlodeFlyDot int
 }
 
 func NewExplode() *Explode{
@@ -26,7 +27,8 @@ func (e *Explode) Init(){
   e.position = &image.Point{400, 240}
   e.circles = []*Circle{}
   e.explodeDot = 100
-  e.expandTime = 60
+  e.expandTime = 240
+  e.exlodeFlyDot = 5
   e.LoadExplodeDot()
 }
 
@@ -37,7 +39,7 @@ func (e *Explode) LoadExplodeDot(){
     vector := &FPoint{}
     vector.X = float64(float64(rand.Intn(40))/5 - 4)
     vector.Y = float64(-rand.Intn(6))
-    colorFire := color.RGBA{230, 230, 230, 255}
+    colorFire := color.RGBA{255, 255, 255, 255}
     offsetX := rand.Intn(10)
     offsetY := rand.Intn(30)
     if i%2 == 0{
@@ -58,11 +60,9 @@ func (e *Explode) UpdateExplode(c *Circle){
   }
   c.Velocity.Y += 0.02
   e.expandTime --
-  c.cColor.R -= 3
-  c.cColor.G -= 3
-  c.cColor.B -= 3
-  // if c.Velocity.Y < 0{
-  // }
+  c.cColor.R -= 4
+  c.cColor.G -= 4
+  c.cColor.B -= 4
 }
 
 func (e *Explode) Update(){
@@ -73,7 +73,6 @@ func (e *Explode) Update(){
       need_remove = append(need_remove, index)
     }
   }
-  // fmt.Println(need_remove)
   for index, cIndex := range(need_remove){
     if cIndex == len(e.circles) -1 {
       e.circles = e.circles[:cIndex]
