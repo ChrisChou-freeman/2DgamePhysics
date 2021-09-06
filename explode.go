@@ -14,7 +14,6 @@ type Explode struct{
   circles []*Circle
   expandTime int
   explodeDot int
-  exlodeFlyDot int
 }
 
 func NewExplode() *Explode{
@@ -28,7 +27,6 @@ func (e *Explode) Init(){
   e.circles = []*Circle{}
   e.explodeDot = 100
   e.expandTime = 240
-  e.exlodeFlyDot = 5
   e.LoadExplodeDot()
 }
 
@@ -39,14 +37,15 @@ func (e *Explode) LoadExplodeDot(){
     vector := &FPoint{}
     vector.X = float64(float64(rand.Intn(40))/5 - 4)
     vector.Y = float64(-rand.Intn(6))
-    colorFire := color.RGBA{255, 255, 255, 255}
+    colorFire := color.RGBA{132, 132, 132, 255}
     offsetX := rand.Intn(10)
     offsetY := rand.Intn(30)
     if i%2 == 0{
       offsetX *= -1
     }
-    newCircle := NewCircle(radius, &FPoint{float64(e.position.X + offsetX), float64(e.position.Y + offsetY)}, vector, colorFire)
-  e.circles = append(e.circles, newCircle)
+    explodPosition := &FPoint{float64(e.position.X + offsetX), float64(e.position.Y + offsetY)}
+    newCircle := NewCircle(radius, explodPosition, vector, colorFire)
+    e.circles = append(e.circles, newCircle)
   }
 }
 
@@ -58,11 +57,9 @@ func (e *Explode) UpdateExplode(c *Circle){
   }else{
     c.Radius -= (rand.Float64() * float64(rand.Intn(6)))
   }
-  c.Velocity.Y += 0.02
+  c.Velocity.Y += 0.03
   e.expandTime --
-  c.cColor.R -= 4
-  c.cColor.G -= 4
-  c.cColor.B -= 4
+  c.cColor.A -= 2
 }
 
 func (e *Explode) Update(){

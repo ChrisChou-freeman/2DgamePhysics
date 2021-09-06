@@ -2,7 +2,8 @@ package main
 
 import (
   "log"
-  	_ "image/png"
+  _"image/png"
+  "image/color"
 
   "github.com/hajimehoshi/ebiten/v2"
   "github.com/hajimehoshi/ebiten/v2/inpututil"
@@ -16,8 +17,13 @@ type Game struct{
 }
 
 func (g *Game) init() {
-  g.physicsTypeList = []GameManager{NewThrow(), NewSpring(), NewFire(), NewExplode()}
-  g.testType = g.physicsTypeList[g.currentTest] 
+  g.physicsTypeList = []GameManager{
+    NewThrow(),
+    NewSpring(),
+    NewFire(),
+    NewExplode(),
+  }
+  g.testType = g.physicsTypeList[g.currentTest]
 }
 
 func (g *Game) keyEvent() {
@@ -44,7 +50,7 @@ func (g *Game) keyEvent() {
 func (g *Game) Update() error {
   g.keyEvent()
   g.testType.Update()
-	return nil
+  return nil
 }
 
 func (g *Game) drawMessages(screen *ebiten.Image) {
@@ -53,8 +59,9 @@ func (g *Game) drawMessages(screen *ebiten.Image) {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-  g.testType.Draw(screen)
+  screen.Fill(color.RGBA{200, 200, 200 ,255})
   g.drawMessages(screen)
+  g.testType.Draw(screen)
 }
 
 func (g *Game) Layout (width, height int) (int, int) {
