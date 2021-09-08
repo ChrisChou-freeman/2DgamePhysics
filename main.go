@@ -22,6 +22,7 @@ func (g *Game) init() {
     NewSpring(),
     NewFire(),
     NewExplode(),
+    // NewCloth(),
   }
   g.testType = g.physicsTypeList[g.currentTest]
 }

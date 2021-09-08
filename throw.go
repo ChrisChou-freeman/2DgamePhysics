@@ -22,6 +22,7 @@ type Throw struct{
   speed int
   hitGround bool
   rotateDegree int
+  rotateSpeed int
   rebound int
 }
 
@@ -41,12 +42,13 @@ func (ts *Throw) Init() {
   ts.rCounter = 0
   ts.hitGround = false
   ts.postion = &image.Point{80, 380}
-  ts.vector = &image.Point{}
+  ts.vector = &image.Point{X: 5, Y: 0}
   ts.force = 20
   ts.gravity = 10
   ts.speed = 4
   ts.ground = image.Point{0, 420}
   ts.rotateDegree = 90
+  ts.rotateSpeed = 3
   ts.rebound = 1
 }
 
@@ -57,7 +59,6 @@ func (ts *Throw) ballBottom() int {
 func (ts *Throw) throw(){
   ts.counter ++
   ts.vector.Y = -ts.force + ts.gravity
-  ts.vector.X = 5
   ts.counter ++
   if ts.force > 0 && ts.counter%ts.speed == 0{
     ts.force --
@@ -72,7 +73,7 @@ func (ts *Throw) Update() {
     ts.hitGround = true
     if ts.rebound > 0 {
       ts.postion.Y -= 1
-      ts.force = 13
+      ts.force = ts.gravity + (int(ts.gravity/3)*ts.rebound) 
       ts.rebound--
     }
     return
@@ -82,7 +83,7 @@ func (ts *Throw) Update() {
 
 func (ts *Throw) rotateImage(iopt *ebiten.DrawImageOptions) float64 {
   if ts.rCounter < ts.rotateDegree{
-    ts.rCounter += 3
+    ts.rCounter += ts.rotateSpeed
   }
   iopt.GeoM.Rotate(float64(ts.rCounter%360) * 2 * math.Pi / 360)
   return float64(ts.rCounter) / float64(ts.rotateDegree) * float64(ts.ball.Bounds().Dy()) 
