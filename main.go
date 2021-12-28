@@ -59,7 +59,7 @@ func (g *Game) drawMessages(screen *ebiten.Image) {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(color.RGBA{200, 200, 200, 255})
+	screen.Fill(color.RGBA{180, 180, 180, 255})
 	g.drawMessages(screen)
 	g.testType.Draw(screen)
 }

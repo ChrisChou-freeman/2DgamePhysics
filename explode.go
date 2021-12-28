@@ -38,7 +38,7 @@ func (e *Explode) LoadExplodeDot() {
 		vector := &FPoint{}
 		vector.X = float64(rand.Intn(40)/5 - 4)
 		vector.Y = float64(-rand.Intn(6))
-		colorFire := color.RGBA{162, 162, 162, 255}
+		colorFire := color.RGBA{220, 220, 220, 255}
 		offsetX := rand.Intn(10)
 		offsetY := rand.Intn(30)
 		if i%2 == 0 {
@@ -61,7 +61,7 @@ func (e *Explode) UpdateExplode(c *Circle) {
 	}
 	c.Velocity.Y += 0.03
 	e.expandTime--
-	c.cColor.A -= 2
+	c.cColor.A -= 4
 }
 
 func (e *Explode) Update() {
